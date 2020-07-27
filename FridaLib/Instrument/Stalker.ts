@@ -241,7 +241,7 @@ function _ConvertTo_IteratorARM( hIterator:StalkerArmIterator ):IteratorARM {
             return null;
         return new Native.ARM.CPUInstruction( hInstruction );
     };
-    hConverted.Keep = hIterator.keep();
+    hConverted.Keep = hIterator.keep;
     hConverted.PutCallout = function( hCallout:Callout, ptrUserData?:Native.Pointer | undefined ):void {
         let ptrData:NativePointer | undefined = ( ptrUserData != undefined ) ? ptrUserData.Handle : undefined;
         hIterator.putCallout( _ConvertFrom_Callout(hCallout), ptrData );
@@ -259,7 +259,7 @@ function _ConvertTo_IteratorThumb( hIterator:StalkerThumbIterator ):IteratorThum
             return null;
         return new Native.ARM.CPUInstruction( hInstruction );
     };
-    hConverted.Keep =hIterator.keep();
+    hConverted.Keep = hIterator.keep;
     hConverted.PutCallout = function( hCallout:Callout, ptrUserData?:Native.Pointer | undefined ):void {
         let ptrData:NativePointer | undefined = ( ptrUserData != undefined ) ? ptrUserData.Handle : undefined;
         hIterator.putCallout( _ConvertFrom_Callout(hCallout), ptrData );
@@ -277,7 +277,7 @@ function _ConvertTo_IteratorARM64( hIterator:StalkerArm64Iterator ):IteratorARM6
             return null;
         return new Native.ARM64.CPUInstruction( hInstruction );
     };
-    hConverted.Keep = hIterator.keep();
+    hConverted.Keep = hIterator.keep;
     hConverted.PutCallout = function( hCallout:Callout, ptrUserData?:Native.Pointer | undefined ):void {
         let ptrData:NativePointer | undefined = ( ptrUserData != undefined ) ? ptrUserData.Handle : undefined;
         hIterator.putCallout( _ConvertFrom_Callout(hCallout), ptrData );

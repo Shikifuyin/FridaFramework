@@ -37,7 +37,7 @@ class CodeRelocator
 		this.m_hX86Relocator = new X86Relocator( ptrInputCode.Handle, hCodeWriter.Handle );
     }
     Reset( ptrInputCode:Pointer, hCodeWriter:CodeWriter ):void {
-		this.m_hX86Relocator = new X86Relocator( ptrInputCode.Handle, hCodeWriter.Handle );
+		this.m_hX86Relocator.reset( ptrInputCode.Handle, hCodeWriter.Handle );
 	}
 
 	// Properties

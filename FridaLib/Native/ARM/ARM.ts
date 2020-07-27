@@ -13,3 +13,5 @@
 // Re-Exports
 export { Register, Context } from './CPUContext';
 export * from './CPUInstruction';
+export * from './CodeWriter';
+export * from './CodeRelocator';

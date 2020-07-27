@@ -48,7 +48,8 @@ export {
     IsMainThread,
     RunInMainThread,
     RunOnVM,
-    GetJNIEnv
+    GetJNIEnv,
+    GetStackTrace
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,3 +244,14 @@ function GetJNIEnv( bThrowExceptions:boolean = false ):any {
         return Java.vm.getEnv();
 }
 
+function GetStackTrace():string {
+    var strResult = "";
+    
+    Java.perform( function() {
+        var hLog = Java.use( "android.util.Log" );
+        var hException = Java.use( "java.lang.Exception" );
+        strResult = hLog.getStackTraceString(hException.$new());
+    });
+    
+    return strResult;
+}

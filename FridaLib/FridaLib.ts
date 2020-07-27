@@ -25,6 +25,7 @@ import * as Kernel from "./System/Kernel";
 import * as Java from "./Instrument/Java";
 import * as Interceptor from "./Instrument/Interceptor";
 import * as Stalker from "./Instrument/Stalker";
+import * as Log from "./Instrument/Log";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Exports
@@ -40,6 +41,7 @@ export {
 
     Java,
     Interceptor,
-    Stalker
+    Stalker,
+    Log
 };
 

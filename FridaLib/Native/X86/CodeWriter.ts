@@ -323,5 +323,5 @@ class CodeWriter
 
 	TestRegImm( strReg:Register, immValue:number ):void   { this.m_hX86Writer.putTestRegU32(strReg, immValue); }
 	TestRegReg( strRegL:Register, strRegR:Register ):void { this.m_hX86Writer.putTestRegReg(strRegL, strRegR); }
-};
+}
 
