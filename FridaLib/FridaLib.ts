@@ -21,6 +21,8 @@ import * as Process from "./System/Process";
 import * as Thread from "./System/Thread";
 import * as Module from "./System/Module";
 import * as Kernel from "./System/Kernel";
+import * as Stream from "./System/Stream";
+import * as Network from "./System/Network";
 import * as Log from "./System/Log";
 import * as Timing from "./System/Timing";
 import * as Interact from "./System/Interact";
@@ -40,6 +42,8 @@ export {
     Thread,
     Module,
     Kernel,
+    Stream,
+    Network,
     Log,
     Timing,
     Interact,
