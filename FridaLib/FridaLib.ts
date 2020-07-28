@@ -22,6 +22,8 @@ import * as Thread from "./System/Thread";
 import * as Module from "./System/Module";
 import * as Kernel from "./System/Kernel";
 import * as Log from "./System/Log";
+import * as Timing from "./System/Timing";
+import * as Interact from "./System/Interact";
 
 import * as Java from "./Instrument/Java";
 import * as Interceptor from "./Instrument/Interceptor";
@@ -31,17 +33,18 @@ import * as Stalker from "./Instrument/Stalker";
 // Exports
 export {
     Native,
-    Memory,
-    Env,
 
+    Env,
+    Memory,
     Process,
     Thread,
     Module,
     Kernel,
+    Log,
+    Timing,
+    Interact,
 
     Java,
     Interceptor,
-    Stalker,
-    Log
+    Stalker
 };
-

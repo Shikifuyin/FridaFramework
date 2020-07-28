@@ -3,9 +3,9 @@
 // Version : 1.0
 // Requirements : V8 engine, latest version (8.4+), ECMAScript ES2020+ compliance
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// File : ./FridaLib/System/Environment.ts
+// File : ./FridaLib/System/Interact.ts
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Description : Execution Environment
+// Description : Interaction between Injected JS and Frida Application
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 'use strict';
 
@@ -15,61 +15,51 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Exports
 export {
-	ARCHITECTURE,
-	PLATFORM,
-	RUNTIME,
+    ReceiveCallback,
+    ReceiveOperation,
 
-	GetTargetArchitecture,
-	GetTargetPlatform,
+    RPCFunction,
 
-	GetFridaRunTime,
-	GetFridaVersion,
-	GetFridaCurrentHeapSize
+    SendMessage,
+    ReceiveMessage,
+
+    ExportFunction
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Architecture
-enum ARCHITECTURE {
-	X86   = 'ia32',
-	X64   = 'x64',
-	ARM   = 'arm',
-	ARM64 = 'arm64',
-	MIPS  = 'mips'
-};
-function GetTargetArchitecture():ARCHITECTURE {
-	return ARCHITECTURE[Process.arch as keyof typeof ARCHITECTURE];
+// Messages Interfaces
+interface ReceiveCallback {
+    ( hMessage:any, hRawData:ArrayBuffer | null ): void;
+}
+interface ReceiveOperation {
+    Wait():void;
+}
+
+function _ConvertTo_ReceiveOperation( hMessageRecvOperation:MessageRecvOperation ):ReceiveOperation {
+    return {
+        Wait: hMessageRecvOperation.wait
+    };
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Platform
-enum PLATFORM {
-	Win32  = 'windows', // Windows
-	Linux  = 'linux',   // Linux, Android
-	Darwin = 'darwin',  // MacOS, iOS
-	QNX    = 'qnx'      // BlackBerry
-};
-function GetTargetPlatform():PLATFORM {
-	return PLATFORM[Process.platform as keyof typeof PLATFORM];
+// RPC Interfaces
+interface RPCFunction {
+    ( ...arrParams:any[] ):any;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Frida runtime
-enum RUNTIME {
-	Duktape = 'DUK', // Deprecated, use Frida options to enforce using V8
-	V8      = 'V8'
-};
-function GetFridaRunTime():RUNTIME {
-	return RUNTIME[Script.runtime as keyof typeof RUNTIME];
+// Messages
+function SendMessage( hMessage:any, hRawData:ArrayBuffer | number[] | undefined = undefined ):void {
+    send( hMessage, hRawData );
+}
+
+function ReceiveMessage( hCallback:ReceiveCallback, strType:string ):ReceiveOperation {
+    return _ConvertTo_ReceiveOperation( recv(strType, hCallback) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Frida version
-function GetFridaVersion():string {
-	return Frida.version;
+// RPC Exports
+function ExportFunction( strName:string, hFunction:RPCFunction ) {
+    rpc.exports[strName] = hFunction;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Frida Heap
-function GetFridaCurrentHeapSize():number {
-	return Frida.heapSize;
-}
