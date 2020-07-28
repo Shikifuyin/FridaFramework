@@ -17,7 +17,7 @@ import { Integer64 } from "../Native/Integer64";
 import { UInteger64 } from "../Native/UInteger64";
 import { StringEncoding } from "../Native/Pointer";
 
-import { _ConvertFrom_AccessFlags, _ConvertTo_AccessFlags } from "../Memory/Memory";
+import { _ConvertFrom_AccessFlags, _ConvertTo_AccessFlags } from "./Memory";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Exports

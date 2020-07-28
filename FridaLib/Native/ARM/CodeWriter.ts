@@ -3,9 +3,9 @@
 // Version : 1.0
 // Requirements : V8 engine, latest version (8.4+), ECMAScript ES2020+ compliance
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// File : ./FridaLib/Native/X86/CodeWriter.ts
+// File : ./FridaLib/Native/ARM/CodeWriter.ts
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Description : ASM Code Writer for X86 Architecture
+// Description : ASM Code Writer for ARM Architecture
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 'use strict';
 
@@ -185,18 +185,18 @@ class CodeWriterARM
     }
 
     // Arithmetics
-    AddRegImm16( strReg:Register, immValue:number ):void                              { this.m_hArmWriter.putAddRegU16(strReg, immValue); }
-    AddRegImm32( strReg:Register, immValue:number ):void                              { this.m_hArmWriter.putAddRegU32(strReg, immValue); }
-    AddRegRegImm( strRegDst:Register, strRegSrc:Register, immValue:number ):void      { this.m_hArmWriter.putAddRegRegImm(strRegDst, strRegSrc, immValue); }
-    AddRegRegReg( strRegDst:Register, strRegSrc1:Register, strRegSrc2:Register ):void { this.m_hArmWriter.putAddRegRegReg(strRegDst, strRegSrc1, strRegSrc2); }
-    AddRegRegRegShift( strRegDst:Register, strRegSrc1:Register, strRegSrc2:Register, strShift:OperandShifter, immShiftValue:number ):void {
-        this.m_hArmWriter.putAddRegRegRegShift( strRegDst, strRegSrc1, strRegSrc2, strShift, immShiftValue );
+    AddRegImm16( strReg:Register, immValue:number ):void                        { this.m_hArmWriter.putAddRegU16(strReg, immValue); }
+    AddRegImm32( strReg:Register, immValue:number ):void                        { this.m_hArmWriter.putAddRegU32(strReg, immValue); }
+    AddRegRegImm( strRegDst:Register, strRegL:Register, immValueR:number ):void { this.m_hArmWriter.putAddRegRegImm(strRegDst, strRegL, immValueR); }
+    AddRegRegReg( strRegDst:Register, strRegL:Register, strRegR:Register ):void { this.m_hArmWriter.putAddRegRegReg(strRegDst, strRegL, strRegR); }
+    AddRegRegRegShift( strRegDst:Register, strRegL:Register, strRegR:Register, strShift:OperandShifter, immShiftValue:number ):void {
+        this.m_hArmWriter.putAddRegRegRegShift( strRegDst, strRegL, strRegR, strShift, immShiftValue );
     }
 
-    SubRegImm16( strReg:Register, immValue:number ):void                              { this.m_hArmWriter.putSubRegU16(strReg, immValue); }
-    SubRegImm32( strReg:Register, immValue:number ):void                              { this.m_hArmWriter.putSubRegU32(strReg, immValue); }
-    SubRegRegImm( strRegDst:Register, strRegSrc:Register, immValue:number ):void      { this.m_hArmWriter.putSubRegRegImm(strRegDst, strRegSrc, immValue); }
-    SubRegRegReg( strRegDst:Register, strRegSrc1:Register, strRegSrc2:Register ):void { this.m_hArmWriter.putSubRegRegReg(strRegDst, strRegSrc1, strRegSrc2); }
+    SubRegImm16( strReg:Register, immValue:number ):void                        { this.m_hArmWriter.putSubRegU16(strReg, immValue); }
+    SubRegImm32( strReg:Register, immValue:number ):void                        { this.m_hArmWriter.putSubRegU32(strReg, immValue); }
+    SubRegRegImm( strRegDst:Register, strRegL:Register, immValueR:number ):void { this.m_hArmWriter.putSubRegRegImm(strRegDst, strRegL, immValueR); }
+    SubRegRegReg( strRegDst:Register, strRegL:Register, strRegR:Register ):void { this.m_hArmWriter.putSubRegRegReg(strRegDst, strRegL, strRegR); }
 
     AndSRegRegImm( strRegDst:Register, strRegSrc:Register, immValue:number ):void { this.m_hArmWriter.putAndsRegRegImm(strRegDst, strRegSrc, immValue); }
 

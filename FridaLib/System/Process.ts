@@ -11,7 +11,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Imports
-import { AccessFlag } from "../Memory/Memory";
+import { AccessFlag } from "./Memory";
 
 import { Pointer } from "../Native/Pointer";
 import { CPUContext, _ConvertTo_CPUContext } from "../Native/CPUContext";

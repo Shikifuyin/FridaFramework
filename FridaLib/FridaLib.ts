@@ -14,18 +14,18 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Imports
 import * as Native from "./Native/Native";
-import * as Memory from "./Memory/Memory";
-import * as Env from "./Environment/Environment";
 
+import * as Env from "./System/Environment";
+import * as Memory from "./System/Memory";
 import * as Process from "./System/Process";
 import * as Thread from "./System/Thread";
 import * as Module from "./System/Module";
 import * as Kernel from "./System/Kernel";
+import * as Log from "./System/Log";
 
 import * as Java from "./Instrument/Java";
 import * as Interceptor from "./Instrument/Interceptor";
 import * as Stalker from "./Instrument/Stalker";
-import * as Log from "./Instrument/Log";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Exports

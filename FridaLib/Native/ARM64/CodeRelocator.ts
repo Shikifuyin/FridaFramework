@@ -3,9 +3,9 @@
 // Version : 1.0
 // Requirements : V8 engine, latest version (8.4+), ECMAScript ES2020+ compliance
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// File : ./FridaLib/Native/X86/CodeRelocator.ts
+// File : ./FridaLib/Native/ARM64/CodeRelocator.ts
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Description : ASM Code Relocator for X86 Architecture
+// Description : ASM Code Relocator for ARM64 Architecture
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 'use strict';
 
@@ -23,53 +23,51 @@ export {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// X86 CodeRelocator
+// ARM64 CodeRelocator
 class CodeRelocator
 {
 	// Members
-	private m_hX86Relocator:X86Relocator;
+	private m_hArm64Relocator:Arm64Relocator;
 
 	// Getter
-	get Handle():X86Relocator { return this.m_hX86Relocator; }
+	get Handle():Arm64Relocator { return this.m_hArm64Relocator; }
 
 	// Constructor
 	constructor( ptrInputCode:Pointer, hCodeWriter:CodeWriter ) {
-		this.m_hX86Relocator = new X86Relocator( ptrInputCode.Handle, hCodeWriter.Handle );
+		this.m_hArm64Relocator = new Arm64Relocator( ptrInputCode.Handle, hCodeWriter.Handle );
     }
     Reset( ptrInputCode:Pointer, hCodeWriter:CodeWriter ):void {
-		this.m_hX86Relocator.reset( ptrInputCode.Handle, hCodeWriter.Handle );
+		this.m_hArm64Relocator.reset( ptrInputCode.Handle, hCodeWriter.Handle );
 	}
 
 	// Properties
-	IsAtEndOfBlock():boolean { return this.m_hX86Relocator.eob; } // A Branch of any kind has been reached
-	IsAtEndOfInput():boolean { return this.m_hX86Relocator.eoi; } // Code beyond may not be valid
+	IsAtEndOfBlock():boolean { return this.m_hArm64Relocator.eob; } // A Branch of any kind has been reached
+	IsAtEndOfInput():boolean { return this.m_hArm64Relocator.eoi; } // Code beyond may not be valid
 
 	// Methods
-	Cleanup():void { this.m_hX86Relocator.dispose(); }
+	Cleanup():void { this.m_hArm64Relocator.dispose(); }
 
 	// Read instructions to internal buffer 
-	ReadNext():number { return this.m_hX86Relocator.readOne(); } // returns number of bytes read so far
+	ReadNext():number { return this.m_hArm64Relocator.readOne(); } // returns number of bytes read so far
 
 	GetLastInstructionRead():CPUInstruction | null {
-        if ( this.m_hX86Relocator.input == null )
+        if ( this.m_hArm64Relocator.input == null )
             return null;
-        return new CPUInstruction( this.m_hX86Relocator.input as X86Instruction );
+        return new CPUInstruction( this.m_hArm64Relocator.input as Arm64Instruction );
     }
 
 	// Write buffered instructions
-	WriteNext():void        { this.m_hX86Relocator.writeOne(); }
-	WriteNextNoLabel():void { this.m_hX86Relocator.writeOneNoLabel(); } // When all branches are relocated (ie. Stalker)
-
-	SkipNext():void        { this.m_hX86Relocator.skipOne(); }
-	SkipNextNoLabel():void { this.m_hX86Relocator.skipOneNoLabel(); } // When all branches are relocated (ie. Stalker)
-
-	WriteAll():void { this.m_hX86Relocator.writeAll(); }
+	WriteNext():void { this.m_hArm64Relocator.writeOne(); }
+	SkipNext():void  { this.m_hArm64Relocator.skipOne(); }
+	
+	WriteAll():void { this.m_hArm64Relocator.writeAll(); }
 
 	PeekNextWriteInstr():CPUInstruction | null {
-        let tmpInstr:Instruction | null = this.m_hX86Relocator.peekNextWriteInsn();
+        let tmpInstr:Instruction | null = this.m_hArm64Relocator.peekNextWriteInsn();
         if ( tmpInstr == null )
             return null;
-        return new CPUInstruction( tmpInstr as X86Instruction );
+        return new CPUInstruction( tmpInstr as Arm64Instruction );
     }
-	PeekNextWriteAddress():Pointer { return new Pointer( this.m_hX86Relocator.peekNextWriteSource() ); }
+	PeekNextWriteAddress():Pointer { return new Pointer( this.m_hArm64Relocator.peekNextWriteSource() ); }
 }
+

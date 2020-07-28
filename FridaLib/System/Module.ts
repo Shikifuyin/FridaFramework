@@ -13,7 +13,7 @@
 // Imports
 import { Pointer } from "../Native/Pointer";
 
-import { Range, _ConvertTo_Range, _ConvertTo_AccessFlags, _ConvertFrom_AccessFlags } from "../Memory/Memory";
+import { Range, _ConvertTo_Range, _ConvertTo_AccessFlags, _ConvertFrom_AccessFlags } from "./Memory";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Exports
