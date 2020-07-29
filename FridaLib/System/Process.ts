@@ -178,6 +178,13 @@ class DebugSymbolData {
     // Convert
     toString():string { return this.m_hDebugSymbol.toString(); }
 
+    // Properties
+    GetAddress():Pointer          { return new Pointer(this.m_hDebugSymbol.address); }
+    GetName():string | null       { return this.m_hDebugSymbol.name; }
+    GetModuleName():string | null { return this.m_hDebugSymbol.moduleName; }
+    GetFileName():string | null   { return this.m_hDebugSymbol.fileName; }
+    GetLineNumber():number | null { return this.m_hDebugSymbol.lineNumber; }
+
     // Methods
     static GetFunctionByName( strName:string ):Pointer {
         return new Pointer( DebugSymbol.getFunctionByName(strName) );

@@ -211,7 +211,8 @@ class FunctionPtr extends Pointer
     get Handle():NativeFunction { return (this.m_hNativePointer as NativeFunction); }
     
     // Constructor
-    constructor( ptrAddress:Pointer, strReturnType:FunctionSignatureType, arrArgumentTypes:FunctionSignatureType[], hOptions:FunctionPtrOptions | undefined ) {
+    constructor( ptrAddress:Pointer, strReturnType:FunctionSignatureType, arrArgumentTypes:FunctionSignatureType[],
+                 hOptions:FunctionPtrOptions | undefined = undefined ) {
         if ( hOptions != undefined ) {
             let hOpt:NativeFunctionOptions = _ConvertFrom_FunctionPtrOptions( hOptions );
             super( new NativeFunction(ptrAddress.Handle, strReturnType, arrArgumentTypes, hOpt) );
@@ -274,7 +275,8 @@ class SystemFunctionPtr extends Pointer
     get Handle():SystemFunction { return (this.m_hNativePointer as SystemFunction); }
     
     // Constructor
-    constructor( ptrAddress:Pointer, strReturnType:FunctionSignatureType, arrArgumentTypes:FunctionSignatureType[], hOptions:FunctionPtrOptions | undefined ) {
+    constructor( ptrAddress:Pointer, strReturnType:FunctionSignatureType, arrArgumentTypes:FunctionSignatureType[],
+                 hOptions:FunctionPtrOptions | undefined = undefined ) {
         if ( hOptions != undefined ) {
             let hOpt:NativeFunctionOptions = _ConvertFrom_FunctionPtrOptions( hOptions );
             super( new SystemFunction(ptrAddress.Handle, strReturnType, arrArgumentTypes, hOpt) );
@@ -320,7 +322,7 @@ class CallBackFunctionPtr extends Pointer
     
     // Constructor
     constructor( hCallbackImplementation:CallbackImplementation, strReturnType:FunctionSignatureType, arrArgumentTypes:FunctionSignatureType[],
-                 strCallingConvention:CallingConvention | undefined ) {
+                 strCallingConvention:CallingConvention | undefined = undefined ) {
         super( new NativeCallback(_ConvertFrom_CallbackImplementation(hCallbackImplementation), strReturnType, arrArgumentTypes, strCallingConvention) );
     }
 }

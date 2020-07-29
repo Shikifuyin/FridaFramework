@@ -156,7 +156,7 @@ class Pointer
     ReadFloat():number  { return this.m_hNativePointer.readFloat(); }
     ReadDouble():number { return this.m_hNativePointer.readDouble(); }
     
-	ReadString( iType:StringEncoding, iLength:number | undefined ):string | null {
+	ReadString( iType:StringEncoding, iLength:number | undefined = undefined ):string | null {
 		switch( iType ) {
 			case StringEncoding.ASCII: return this.m_hNativePointer.readCString( iLength );
 			case StringEncoding.UTF8:  return this.m_hNativePointer.readUtf8String( iLength );

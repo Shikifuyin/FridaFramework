@@ -145,7 +145,7 @@ function _ConvertFrom_ListenerCallback( hListenerCallback:ListenerCallback ):Inv
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Interceptor Attach/Detach
-function Attach( ptrTarget:Pointer, hCallBacks:ListenerCallback, ptrUserData:Pointer | undefined ):InvokeListener {
+function Attach( ptrTarget:Pointer, hCallBacks:ListenerCallback, ptrUserData:Pointer | undefined = undefined ):InvokeListener {
     let hCB:InvocationListenerCallbacks | InstructionProbeCallback = _ConvertFrom_ListenerCallback( hCallBacks );
     let ptrData:NativePointer | undefined = ( ptrUserData != undefined ) ? ptrUserData.Handle : undefined;
     return new InvokeListener( Interceptor.attach(ptrTarget.Handle, hCB, ptrData) );
@@ -158,7 +158,7 @@ function DetachAll():void {
 // Interceptor Replace/Revert (Can use both Native.CallBackFunctionPtr or Native.C.Code !)
 // Native C Code : gum_invocation_context_get_listener_function_data() to get ptrUserData
 // Native C Code : gum_interceptor_get_current_invocation() to get a (GumInvocationContext *)
-function Replace( ptrTarget:Pointer, ptrReplacement:Pointer, ptrUserData:Pointer | undefined ):void {
+function Replace( ptrTarget:Pointer, ptrReplacement:Pointer, ptrUserData:Pointer | undefined = undefined ):void {
     let ptrData:NativePointer | undefined = ( ptrUserData != undefined ) ? ptrUserData.Handle : undefined;
     Interceptor.replace( ptrTarget.Handle, ptrReplacement.Handle, ptrData );
 }
