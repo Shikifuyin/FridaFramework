@@ -14,10 +14,12 @@
 import * as FridaLib from "./FridaLib/FridaLib";
 
 import * as Enumerator from "./ToolBox/Enumerators";
+import * as Hook from "./ToolBox/Hooks";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Exports
 export {
     FridaLib,
-    Enumerator
+    Enumerator,
+    Hook
 };

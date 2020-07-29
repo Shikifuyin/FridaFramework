@@ -111,8 +111,9 @@ function EnumNativeMethods():void
     let mapAddressToName:AddressToNameMap = {};
 
     // Intercept FindClass calls to populate our map
-    let hFindCB:FridaLib.Interceptor.ScriptListenerCallback = {
+    FridaLib.Interceptor.Attach( GetNativeAddress(iFindClassIndex), {
         _type: FridaLib.Interceptor.ListenerCallbackType.Script,
+
         OnEnter: function( arrArgs:FridaLib.Native.Pointer[] ):void {
             // args[0] -> JNIEnv * env
             // args[1] -> const char * name
@@ -124,12 +125,12 @@ function EnumNativeMethods():void
             FridaLib.Log.Info( "[EnumNativeMethods] Intercepted jclass : " + strName, FridaLib.Log.Color.LightGreen );
             mapAddressToName[arrArgs[0].toString()] = strName;
         }
-    };
-    FridaLib.Interceptor.Attach( GetNativeAddress(iFindClassIndex), hFindCB );
+    });
     
     // Intercept RegisterNatives calls
-    let hRegisterNativesCB:FridaLib.Interceptor.ScriptListenerCallback = {
+    FridaLib.Interceptor.Attach( GetNativeAddress(iRegisterNativesIndex), {
         _type: FridaLib.Interceptor.ListenerCallbackType.Script,
+
         OnEnter: function( arrArgs:FridaLib.Native.Pointer[] ) {
             // args[0] -> JNIEnv * env
             // args[1] -> jclass clazz
@@ -181,7 +182,6 @@ function EnumNativeMethods():void
                 );
             }
         }
-    };
-    FridaLib.Interceptor.Attach( GetNativeAddress(iRegisterNativesIndex), hRegisterNativesCB );
+    });
 }
 
